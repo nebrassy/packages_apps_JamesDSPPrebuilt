@@ -16,6 +16,10 @@ ifeq ($PRODUCT_MANUFACTURER),HUAWEI)
          JDSP_TARGET := arm
 endif
 
+ifneq (,$(filter $(TARGET_DEVICE), walleye taimen crosshatch blueline mata jasmine star2lte z2_row))
+                JDSP_LIBWA := true
+endif
+
 include $(CLEAR_VARS)
 LOCAL_MODULE := JamesDSPPrebuilt
 LOCAL_MODULE_TAGS := debug
@@ -35,6 +39,13 @@ LOCAL_MODULE_CLASS := SHARED_LIBRARIES
 LOCAL_MODULE_SUFFIX := .so
 LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/lib/soundfx
 LOCAL_SRC_FILES := $(JDSP_DRIVER)/$(JDSP_TARGET)/libjamesdsp.so
+ifeq ($(JDSP_LIBWA),true)
+LOCAL_POST_INSTALL_CMD := if [ -f $(TARGET_OUT)/lib/libstdc++.so ] && [ ! -f $(TARGET_OUT_VENDOR)/lib/libstdc++.so ]; then \
+    cp -a $(TARGET_OUT)/lib/libstdc++.so $(TARGET_OUT_VENDOR)/lib/libstdc++.so; \
+    elif [ -f $(TARGET_OUT_VENDOR)/lib/libstdc++.so ] && [ ! -f $(TARGET_OUT)/lib/libstdc++.so ]; then \
+    cp -a $(TARGET_OUT_VENDOR)/lib/libstdc++.so $(TARGET_OUT)/lib/libstdc++.so; \
+    fi
+endif
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
