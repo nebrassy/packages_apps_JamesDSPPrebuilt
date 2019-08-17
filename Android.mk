@@ -22,7 +22,7 @@ LOCAL_MODULE_TAGS := debug
 LOCAL_MODULE_CLASS := APPS
 LOCAL_PRIVILEGED_MODULE := true
 LOCAL_CERTIFICATE := PRESIGNED
-LOCAL_SHARED_LIBRARIES := libjamesdspprebuilt
+LOCAL_SHARED_LIBRARIES := libjamesdsp
 LOCAL_SRC_FILES := $(JDSP_DRIVER)/JamesDSPManager.apk
 include $(BUILD_PREBUILT)
 
@@ -38,12 +38,12 @@ LOCAL_SRC_FILES := $(JDSP_DRIVER)/$(JDSP_TARGET)/libjamesdsp.so
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
-LOCAL_MODULE := privapp-permisisons-james.dsp
+LOCAL_MODULE := privapp-permissions-james.dsp
 LOCAL_MODULE_TAGS := debug
 LOCAL_MODULE_CLASS := ETC
 LOCAL_MODULE_SUFFIX := .xml
 LOCAL_MODULE_PATH := $(TARGET_OUT_ETC)/permissions
-LOCAL_SRC_FILES := privapp-permisisons-james.dsp.xml
+LOCAL_SRC_FILES := privapp-permissions-james.dsp.xml
 include $(BUILD_PREBUILT)
 
 endif
